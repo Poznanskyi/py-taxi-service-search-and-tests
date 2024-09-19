@@ -63,9 +63,9 @@ class TestDriverModel(TestCase):
         driver = get_user_model().objects.create_user(**DEFAULT_USER_PARAMS)
         self.assertEqual(
             str(driver),
-            f"{DEFAULT_USER_PARAMS["username"]} "
-            f"({DEFAULT_USER_PARAMS["first_name"]} "
-            f"{DEFAULT_USER_PARAMS["last_name"]})",
+            "{username} ({first_name} {last_name})".format(
+                **DEFAULT_USER_PARAMS
+            ),
         )
 
 
