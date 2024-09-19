@@ -3,6 +3,7 @@ from django.template import Library
 
 register = Library()
 
+
 @register.simple_tag
 def query_transform(request, **kwargs):
     query_params = request.GET.copy()

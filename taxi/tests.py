@@ -63,9 +63,9 @@ class TestDriverModel(TestCase):
         driver = get_user_model().objects.create_user(**DEFAULT_USER_PARAMS)
         self.assertEqual(
             str(driver),
-            f"{DEFAULT_USER_PARAMS['username']} "
-            f"({DEFAULT_USER_PARAMS['first_name']} "
-            f"{DEFAULT_USER_PARAMS['last_name']})",
+            f"{DEFAULT_USER_PARAMS["username"]} "
+            f"({DEFAULT_USER_PARAMS["first_name"]} "
+            f"{DEFAULT_USER_PARAMS["last_name"]})",
         )
 
 
@@ -133,7 +133,10 @@ class PrivateTestCarList(TestCase):
     def test_search(self):
         model = "QWERTY"
         country = "Neverland"
-        manufacturer = Manufacturer.objects.create(model=model, country=country)
+        manufacturer = Manufacturer.objects.create(
+            model=model,
+            country=country
+        )
         Car.objects.create(model=model, manufacturer=manufacturer)
         url = reverse("taxi:car_list")
         response = self.client.get(url, {"model": model})
