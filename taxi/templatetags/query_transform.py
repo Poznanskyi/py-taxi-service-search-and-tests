@@ -1,12 +1,14 @@
-from django.template import Library
+from django import template
 
-
-register = Library()
+register = template.Library()
 
 
 @register.simple_tag
 def query_transform(request, **kwargs):
-    query_params = request.GET.copy()
+    updated = request.GET.copy()
     for key, value in kwargs.items():
-        query_params[key] = value
-    return query_params.urlencode()
+        if value is not None:
+            updated[key] = value
+        else:
+            updated.pop(key, 0)
+    return updated.urlencode()
