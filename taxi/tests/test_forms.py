@@ -69,6 +69,7 @@ class CarSearchFormTests(TestCase):
         cars = Car.objects.filter(model__icontains=model)
         self.assertEqual(cars.count(), 6)
         self.assertEqual(cars.first().model, "test1")
+        self.assertNotIn('user', [car.model for car in cars])
 
     def test_form_without_data(self):
         form = CarSearchForm(data={})
